@@ -1,0 +1,196 @@
+// Estructura base 
+class NodoCancion {
+    String titulo;
+    String artista;
+    NodoCancion siguiente;
+    NodoCancion anterior; 
+    public NodoCancion(String titulo, String artista) {
+        this.titulo = titulo;
+        this.artista = artista;
+        this.siguiente = null;
+        this.anterior = null;
+    }
+}
+
+// SECCIÓN 1 LISTA SIMPLE
+class ListaSimpleMusica {
+    NodoCancion cabeza;
+
+    // Ejercicio 1: - Agregar a la cola 
+    public void insertarAlFinal(String titulo, String artista) {
+        NodoCancion nuevaCancion = new NodoCancion(titulo, artista);
+        if (cabeza == null) {
+            cabeza = nuevaCancion;
+        } else {
+            NodoCancion temp = cabeza;
+            while (temp.siguiente != null) {
+                temp = temp.siguiente;
+            }
+            temp.siguiente = nuevaCancion;
+        }
+    }
+
+    // Ejercicio 2  Buscar y eliminar 
+    public void eliminarPorTitulo(String tituloBusqueda) {
+        if (cabeza == null) return;
+
+        if (cabeza.titulo.equalsIgnoreCase(tituloBusqueda)) {
+            cabeza = cabeza.siguiente;
+            return;
+        }
+
+        NodoCancion actual = cabeza;
+        while (actual.siguiente != null && !actual.siguiente.titulo.equalsIgnoreCase(tituloBusqueda)) {
+            actual = actual.siguiente;
+        }
+
+        if (actual.siguiente != null) {
+            actual.siguiente = actual.siguiente.siguiente; 
+        }
+    }
+
+    // Ejercicio 3 Mostrar lista de reproducción 
+    public void mostrarPlaylist() {
+        NodoCancion actual = cabeza;
+        System.out.println("--- Playlist Actual ---");
+        while (actual != null) {
+            System.out.println(actual.titulo + " - " + actual.artista);
+            actual = actual.siguiente;
+        }
+    }
+}
+
+
+// SECCIÓN 2 LISTA DOBLE
+// Ejercicio 4 Construcción de estructura doble
+class ListaDobleMusica {
+    NodoCancion cabeza;
+    NodoCancion actual; 
+
+    public void agregar(String titulo, String artista) {
+        NodoCancion nuevo = new NodoCancion(titulo, artista);
+        if (cabeza == null) {
+            cabeza = nuevo;
+            actual = cabeza;
+        } else {
+            NodoCancion temp = cabeza;
+            while (temp.siguiente != null) {
+                temp = temp.siguiente;
+            }
+            temp.siguiente = nuevo;
+            nuevo.anterior = temp; 
+        }
+    }
+
+    // Ejercicio 5 Controles Siguiente/Anterior 
+    public void reproducirSiguiente() {
+        if (actual != null && actual.siguiente != null) {
+            actual = actual.siguiente;
+            System.out.println("Reproduciendo: " + actual.titulo);
+        } else {
+            System.out.println("Fin de la lista.");
+        }
+    }
+
+    public void reproducirAnterior() {
+        if (actual != null && actual.anterior != null) {
+            actual = actual.anterior;
+            System.out.println("Reproduciendo: " + actual.titulo);
+        } else {
+            System.out.println("Estás en la primera canción.");
+        }
+    }
+
+    // Ejercicio 6 Reproducir a continuación 
+    public void insertarDespuesDelActual(String titulo, String artista) {
+        if (actual == null) return;
+        
+        NodoCancion nuevo = new NodoCancion(titulo, artista);
+        nuevo.siguiente = actual.siguiente;
+        nuevo.anterior = actual;
+
+        if (actual.siguiente != null) {
+            actual.siguiente.anterior = nuevo;
+        }
+        actual.siguiente = nuevo;
+    }
+
+    // Ejercicio 7 Ordenar alfabéticamente 
+    public void ordenarPorArtista() {
+        if (cabeza == null || cabeza.siguiente == null) return;
+
+        boolean intercambiado;
+        do {
+            intercambiado = false;
+            NodoCancion actualNodo = cabeza;
+            while (actualNodo.siguiente != null) {
+                if (actualNodo.artista.compareToIgnoreCase(actualNodo.siguiente.artista) > 0) {
+                    // Intercambiar datos en lugar de mover punteros por simplicidad
+                    String tempTitulo = actualNodo.titulo;
+                    String tempArtista = actualNodo.artista;
+                    
+                    actualNodo.titulo = actualNodo.siguiente.titulo;
+                    actualNodo.artista = actualNodo.siguiente.artista;
+                    
+                    actualNodo.siguiente.titulo = tempTitulo;
+                    actualNodo.siguiente.artista = tempArtista;
+                    
+                    intercambiado = true;
+                }
+                actualNodo = actualNodo.siguiente;
+            }
+        } while (intercambiado);
+    }
+}
+
+// SECCIÓN 3: LISTAS CIRCULARES
+class ListaCircularMusica {
+    NodoCancion cabeza;
+    NodoCancion cola;
+
+    // Ejercicio 8 Lista Circular 
+    public void agregarCircularSimple(String titulo, String artista) {
+        NodoCancion nuevo = new NodoCancion(titulo, artista);
+        if (cabeza == null) {
+            cabeza = nuevo;
+            cola = nuevo;
+            cola.siguiente = cabeza; 
+        } else {
+            cola.siguiente = nuevo;
+            cola = nuevo;
+            cola.siguiente = cabeza; 
+        }
+    }
+
+    // Ejercicio 9 Lista Circular Doble 
+    public void agregarCircularDoble(String titulo, String artista) {
+        NodoCancion nuevo = new NodoCancion(titulo, artista);
+        if (cabeza == null) {
+            cabeza = nuevo;
+            cola = nuevo;
+            cabeza.siguiente = cabeza;
+            cabeza.anterior = cabeza;
+        } else {
+            cola.siguiente = nuevo;
+            nuevo.anterior = cola;
+            nuevo.siguiente = cabeza;
+            cabeza.anterior = nuevo;
+            cola = nuevo;
+        }
+    }
+
+    // Ejercicio 10 contarpistas
+    public int contarPistas() {
+        if (cabeza == null) return 0;
+        
+        int contador = 0;
+        NodoCancion actual = cabeza;
+        
+        do {
+            contador++;
+            actual = actual.siguiente;
+        } while (actual != cabeza); 
+        
+        return contador;
+    }
+}
