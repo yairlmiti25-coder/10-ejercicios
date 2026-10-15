@@ -1,0 +1,46 @@
+
+public class EjerciciosExpresiones {
+
+    public static void main(String[] args) {
+
+        // Ejercicio 1: Suma y multiplicacion
+        int resultado1 = 8 + 3 * 4;
+        System.out.println("Ejercicio 1: 8 + 3 * 4 = " + resultado1);
+
+        // Ejercicio 2: Uso de parentesis
+        int resultado2 = (8 + 3) * 4;
+        System.out.println("Ejercicio 2: (8 + 3) * 4 = " + resultado2);
+
+        // Ejercicio 3: Division y suma
+        int resultado3 = 24 / 6 + 5;
+        System.out.println("Ejercicio 3: 24 / 6 + 5 = " + resultado3);
+
+        // Ejercicio 4: Resta y multiplicacion
+        int resultado4 = 18 - 2 * 5;
+        System.out.println("Ejercicio 4: 18 - 2 * 5 = " + resultado4);
+
+        // Ejercicio 5: Parentesis y division
+        int resultado5 = (15 + 9) / 4;
+        System.out.println("Ejercicio 5: (15 + 9) / 4 = " + resultado5);
+
+        // Ejercicio 6: Multiplicacion, division y suma
+        int resultado6 = 7 * 3 + 12 / 4;
+        System.out.println("Ejercicio 6: 7 * 3 + 12 / 4 = " + resultado6);
+
+        // Ejercicio 7: Parentesis anidados
+        int resultado7 = 5 * (6 - (8 / 4));
+        System.out.println("Ejercicio 7: 5 * (6 - (8 / 4)) = " + resultado7);
+
+        // Ejercicio 8: Operaciones combinadas
+        int resultado8 = 30 / 5 + 4 * 2 - 3;
+        System.out.println("Ejercicio 8: 30 / 5 + 4 * 2 - 3 = " + resultado8);
+
+        // Ejercicio 9: Multiplicacion de expresiones
+        int resultado9 = (12 - 4) * (3 + 2);
+        System.out.println("Ejercicio 9: (12 - 4) * (3 + 2) = " + resultado9);
+
+        // Ejercicio 10: Division, parentesis y multiplicacion
+        int resultado10 = 40 / (2 * 5) + 3 * 4;
+        System.out.println("Ejercicio 10: 40 / (2 * 5) + 3 * 4 = " + resultado10);
+    }
+}
